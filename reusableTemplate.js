@@ -10,9 +10,14 @@ var library = (function(){
 			
 		},
 
-		filter : function(list, test) {},
+		filter : function(list, test) {
+			var myEvenArray = list.filter(test);
+			return myEvenArray;
+		},
 
-		reject : function(list, test) {},
+		reject : function(list, test) {
+			
+		},
 
 		map : function(list, iterator) {},
 
@@ -38,7 +43,7 @@ var library = (function(){
 
 		// Objects --- Complete Functions Below
 		extend : function(obj) {
-			return obj;
+			
 		},
 
 		defaults : function(obj) {},
@@ -62,11 +67,18 @@ var library = (function(){
 		},
 
 		indexOf : function(array, target){
-			
+			for (var i = 0; i < array.length; i++) {
+				var element = array[i];
+				if (element === target){
+					return (i);
+					} 
+				
+				}
+			return (-1);
 		},
 
 		uniq : function(array) {
-			var unique = array.filter(onlyunique);
+		
 		},
 
 		// Advanced Arrays --- Complete Functions Below
