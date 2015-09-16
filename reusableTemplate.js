@@ -7,18 +7,38 @@ var library = (function(){
 
 		// Collections --- Complete Functions Below
 		each : function(list, iterator) {
-			
+			 if (Array.isArray(list)) {
+             for (var i = 0; i < list.length; i++)
+                 iterator(list[i], i, list);
+            } else if (list instanceof Object) {
+             for (var key in list)
+                 iterator(list[key], key, list);
+         } else if (list === null) {
+             return list;}
 		},
 
 		filter : function(list, test) {
-			var ar = [];
-	     for (var i = 0; i < list.length; i++) {
-    		if(i % 2 === 0) { // index is even
-        	ar.push(list[i]);
-    } 
-}
-return ar;
+			var evens = [];
+			var odds = [];
+			for (var i = 0; i < list.length; i++) {
+				if (test(list[i]) === true){
+					evens.push(list[i])
+				} else {
+					odds.push(list[i])
+				}
+			}
+			return evens
+			return odds
 			
+		// 	var myEvens = [];
+	    //   for (var i = 0; i < list.length; i++) {
+    	//  	if (list[i] % 2 === 0) { // index is even
+        // 	myEvens.push(list[i]);
+    	// 	} 
+			
+		// }
+		//  return myEvens
+
 			// for (var i = 0; i < list.length; i++) {
 			// 	var element = list[i];
 			// 	if (element % 2 === 0){
@@ -36,20 +56,52 @@ return ar;
 		},
 
 		reject : function(list, test) {
-			
+				var evens = [];
+				var odds = [];
+				for (var i = 0; i < list.length; i++) {
+				if (test(list[i]) !== true){
+					evens.push(list[i])
+				} else {
+					odds.push(list[i])
+				}
+			}
+			return evens
+			return odds
 		},
-
-		map : function(list, iterator) {},
-
+		
+		map : function(list, iterator) {
+			var arr = [];
+			for (var i = 0; i < list.length; i++) {
+				arr.push(iterator(list[i]));
+			}
+			return arr;
+		},
+		
 		pluck : function(list, key) {
 			return this.map(list, function(item){
 				return item[key];
 			});
 		},
-		reduce : function(list, iterator, accumulator) {},
+		reduce : function(list, iterator, accumulator) {
+			if (accumulator === undefined){
+				accumulator = list[0];
+			}
+			for (var i = 0; i < list.length; i++) {
+				accumulator = iterator(list[i],accumulator);
+			
+			}
+			return accumulator;
+		},
 
-		every : function(list, iterator) {},
-
+		every : function(list, iterator) {
+			var arr = [];
+			for (var i = 0; i < list.length; i++) {
+				if(iterator(list[i]) !== true){
+					return false;}
+			} 
+			 return true
+		},
+		
 		some : function(list, iterator) {},
 
 		contains : function(list, target) {},
@@ -98,6 +150,13 @@ return ar;
 		},
 
 		uniq : function(array) {
+			// var arr = [];
+			// for (var i = 0; i < array.length; i++) {
+			// 	if (library.indexOf(arr,array[i]) === -1);
+			// 	arr.push(array[i])
+				
+			// }
+			// return arr
 			return array.filter(function(x, i) {
     			return array.indexOf(x) === i
   			})
@@ -113,9 +172,19 @@ return ar;
 		difference : function(array) {},
 
 		// Functions --- Complete Functions Below
-		once : function(func) {},
+		once : function(func) {	
+			var hasBeenCalled = false;
+			return  function(){
+				if(hasBeenCalled === false){
+				hasBeenCalled = true;
+				func()
+				} 
+			} 
+		},
 
-		memoize : function(func) {},
+		memoize : function(func) {
+			
+		},
 
 		delay : function(func, wait) {}
 	}
