@@ -94,15 +94,28 @@ var library = (function(){
 		},
 
 		every : function(list, iterator) {
-			var arr = [];
+			if (iterator === undefined){
+				iterator = library.identity;
+			}
 			for (var i = 0; i < list.length; i++) {
-				if(iterator(list[i]) !== true){
-					return false;}
+				if(!iterator(list[i])){
+					return false;
+				}
 			} 
-			 return true
+			 return true;
 		},
 		
-		some : function(list, iterator) {},
+		some : function(list, iterator) {
+			if(iterator === undefined){
+				iterator = library.identity;
+			}
+			for (var i = 0; i < list.length; i++) {
+				if(iterator(list[i])){
+					return true;
+				}
+			}
+			return false;
+		},
 
 		contains : function(list, target) {},
 
@@ -186,8 +199,13 @@ var library = (function(){
 			
 		},
 
-		delay : function(func, wait) {}
+		delay : function(func, wait) {
+			var myVar = setTimeout(5)
+			return myVar;
+		}
+		
 	}
+
 })();
 
 
