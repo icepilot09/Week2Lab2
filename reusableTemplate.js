@@ -27,32 +27,8 @@ var library = (function(){
 					odds.push(list[i])
 				}
 			}
-			return evens
-			return odds
-			
-		// 	var myEvens = [];
-	    //   for (var i = 0; i < list.length; i++) {
-    	//  	if (list[i] % 2 === 0) { // index is even
-        // 	myEvens.push(list[i]);
-    	// 	} 
-			
-		// }
-		//  return myEvens
-
-			// for (var i = 0; i < list.length; i++) {
-			// 	var element = list[i];
-			// 	if (element % 2 === 0){
-			// 		return (i);
-			// 		} 
-				
-			// 	}
-			
-			// for (var i = 0; i < list.length; i++){
-			// 	if (i % 2 === 0) {return (i);
-			// 	} 
-			// }	      
-			// var myEvenArray = list.filter(test);
-			// return myEvenArray;
+			return evens;
+			return odds;
 		},
 
 		reject : function(list, test) {
@@ -117,7 +93,17 @@ var library = (function(){
 			return false;
 		},
 
-		contains : function(list, target) {},
+		contains : function(list, target) {
+			if(target === undefined){
+				target = library.indexOf;
+			}
+			for (var i = 0; i < list.length; i++) {
+				if(!target(list[i]))
+					return false;
+				}
+			
+			return true;
+		},
 
 		// Advanced Collections --- Complete Functions Below
 		shuffle : function(array) {},
@@ -128,10 +114,12 @@ var library = (function(){
 
 		// Objects --- Complete Functions Below
 		extend : function(obj) {
-			
+			return obj;
 		},
 
-		defaults : function(obj) {},
+		defaults : function(obj) {
+			return obj;
+		},
 
 		// Arrays --- Complete Functions Below
 		first : function(array, n) {
@@ -178,7 +166,18 @@ var library = (function(){
 		// Advanced Arrays --- Complete Functions Below
 		zip : function() {},
 
-		flatten : function(nestedArray, result) {},
+		flatten : function(nestedArray, result) {
+			var ret = [];
+			for (var i = 0; i < nestedArray.length; i++) {
+				if(Array.isArray(nestedArray[i])){
+					ret = ret.concat(flatten(nestedArray[i]));
+				}
+				else {
+					ret.push(nestedArray[i]);
+				}
+			}
+			return ret;
+		},
 
 		intersection : function() {},
 
