@@ -11,8 +11,28 @@ var library = (function(){
 		},
 
 		filter : function(list, test) {
-			var myEvenArray = list.filter(test);
-			return myEvenArray;
+			var ar = [];
+	     for (var i = 0; i < list.length; i++) {
+    		if(i % 2 === 0) { // index is even
+        	ar.push(list[i]);
+    } 
+}
+return ar;
+			
+			// for (var i = 0; i < list.length; i++) {
+			// 	var element = list[i];
+			// 	if (element % 2 === 0){
+			// 		return (i);
+			// 		} 
+				
+			// 	}
+			
+			// for (var i = 0; i < list.length; i++){
+			// 	if (i % 2 === 0) {return (i);
+			// 	} 
+			// }	      
+			// var myEvenArray = list.filter(test);
+			// return myEvenArray;
 		},
 
 		reject : function(list, test) {
@@ -78,7 +98,9 @@ var library = (function(){
 		},
 
 		uniq : function(array) {
-		
+			return array.filter(function(x, i) {
+    			return array.indexOf(x) === i
+  			})
 		},
 
 		// Advanced Arrays --- Complete Functions Below
